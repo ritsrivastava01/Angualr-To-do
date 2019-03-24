@@ -3,12 +3,12 @@
   <div class="container">
     
     <!-- generate the TOdo List -->
-    <div *ngFor="let todo of todoList | async;">
+    <div *ngFor="let todo of todoList | async as list;">
       <app-to-do-card [todo]=todo (deleteClicked)="deleteToDoClicked($event)" (todoUpdated)="updateTodo($event)" ></app-to-do-card>
     </div>
-
+    
     <!-- show the todo count -->
-    <mat-hint *ngIf="(todoList | async)?.length" align="end" class="mat-caption">{{(todoList | async)?.length }} item left.
+    <mat-hint *ngIf="(todoList | async)?.length" align="end" class="mat-caption">{{inCompleteTodoCount}} item left.
     </mat-hint>
 
     <!-- SHow the message if no todo is added -->

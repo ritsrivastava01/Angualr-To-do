@@ -23,12 +23,18 @@ export class ToDoViewComponent implements OnInit {
 
   // todoList is Observable and listen any update on to-do list
   todoList: Observable<ToDo[]> = this.manageTodoService.allToDos;
+  inCompleteTodoCount = 0;
 
   constructor(private dialog: MatDialog, private manageTodoService: ManageToDoService) { }
 
   ngOnInit() {
     // Get all saved to-do in last session
     this.manageTodoService.getSavedTodos();
+
+    // Find the incomplete todo count
+    this.todoList.subscribe((list: ToDo[]) => {
+      this.inCompleteTodoCount = list.filter((x: ToDo) => x.isCompleted === false).length;
+    });
   }
 
   /**

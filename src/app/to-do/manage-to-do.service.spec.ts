@@ -1,13 +1,14 @@
 import { ManageToDoService } from './manage-to-do.service';
 import { ToDo } from './to-do';
 
-fdescribe('ManageToDService', () => {
+describe('ManageToDService', () => {
     let service: ManageToDoService;
     const fakeTodos = [1, 2, 3, 4].map(x => <ToDo>{
         id: x,
         title: 'todo ' + x,
         isCompleted: false
     });
+    
     beforeEach(() => {
         spyOn(localStorage.__proto__, 'getItem').and.returnValue(JSON.stringify(fakeTodos));
         service = new ManageToDoService();

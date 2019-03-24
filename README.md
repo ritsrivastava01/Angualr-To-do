@@ -50,5 +50,5 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 Add one test case for `manage-to-do.server.ts`
 
 ## URL
-[TODO In Angular](https://ritsrivastava01.github.io/Angular-todo/ )
+[TODO In Angular](https://ritsrivastava01.github.io/Angular-To-do/ )
 
