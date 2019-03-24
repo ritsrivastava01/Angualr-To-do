@@ -7007,7 +7007,7 @@ var ToDoItemPopupComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showContent\">\n\n  <div class=\"container\">\n    \n    <!-- generate the TOdo List -->\n    <div *ngFor=\"let todo of todoList | async;\">\n      <app-to-do-card [todo]=todo (deleteClicked)=\"deleteToDoClicked($event)\" (todoUpdated)=\"updateTodo($event)\" ></app-to-do-card>\n    </div>\n\n    <!-- show the todo count -->\n    <mat-hint *ngIf=\"(todoList | async)?.length\" align=\"end\" class=\"mat-caption\">{{(todoList | async)?.length }} item left.\n    </mat-hint>\n\n    <!-- SHow the message if no todo is added -->\n    <div *ngIf=\"!(todoList | async)?.length\" class=\"mat-title no-todo\">\n      No To-Do Item added. Please click on 'Add' button.\n    </div>\n  </div>\n\n  <!-- show the 'Add' button -->\n  <div class=\"add-todo\">\n    <button mat-fab (click)=\"openToDoItemDialog()\">+</button>\n  </div>\n</div>"
+module.exports = "<div *ngIf=\"showContent\">\n\n  <div class=\"container\">\n    \n    <!-- generate the TOdo List -->\n    <div *ngFor=\"let todo of todoList | async as list;\">\n      <app-to-do-card [todo]=todo (deleteClicked)=\"deleteToDoClicked($event)\" (todoUpdated)=\"updateTodo($event)\" ></app-to-do-card>\n    </div>\n    \n    <!-- show the todo count -->\n    <mat-hint *ngIf=\"(todoList | async)?.length\" align=\"end\" class=\"mat-caption\">{{inCompleteTodoCount}} item left.\n    </mat-hint>\n\n    <!-- SHow the message if no todo is added -->\n    <div *ngIf=\"!(todoList | async)?.length\" class=\"mat-title no-todo\">\n      No To-Do Item added. Please click on 'Add' button.\n    </div>\n  </div>\n\n  <!-- show the 'Add' button -->\n  <div class=\"add-todo\">\n    <button mat-fab (click)=\"openToDoItemDialog()\">+</button>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -7061,6 +7061,7 @@ var ToDoViewComponent = /** @class */ (function () {
         this.manageTodoService = manageTodoService;
         // todoList is Observable and listen any update on to-do list
         this.todoList = this.manageTodoService.allToDos;
+        this.inCompleteTodoCount = 0;
         /**
          * Use to open the TO DO dialog
          * @returns void
@@ -7090,8 +7091,13 @@ var ToDoViewComponent = /** @class */ (function () {
         this.updateTodo = function (todo) { return _this.manageTodoService.toggleTodoComplete(todo); };
     }
     ToDoViewComponent.prototype.ngOnInit = function () {
+        var _this = this;
         // Get all saved to-do in last session
         this.manageTodoService.getSavedTodos();
+        // Find the incomplete todo count
+        this.todoList.subscribe(function (list) {
+            _this.inCompleteTodoCount = list.filter(function (x) { return x.isCompleted === false; }).length;
+        });
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
