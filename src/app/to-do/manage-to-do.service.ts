@@ -28,6 +28,7 @@ export class ManageToDoService {
     // New Todo
     if (!todo.id) {
       todo.id = ++this.lastId;
+      todo.isCompleted = false;
       this.todoList.push(todo);
     }
     this.saveLocalStorage();
