@@ -6727,6 +6727,7 @@ var ManageToDoService = /** @class */ (function () {
             // New Todo
             if (!todo.id) {
                 todo.id = ++_this.lastId;
+                todo.isCompleted = false;
                 _this.todoList.push(todo);
             }
             _this.saveLocalStorage();
