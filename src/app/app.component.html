@@ -1,0 +1,4 @@
+<!-- app header -->
+<app-header (loginDone)=handleLoginDone($event)></app-header> 
+<!-- application -->
+<app-to-do-view [showContent]="loginDone"></app-to-do-view>

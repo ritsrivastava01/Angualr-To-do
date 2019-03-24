@@ -1,0 +1,27 @@
+<!-- Form Component -->
+<h1 mat-dialog-title>Login</h1>
+<div mat-dialog-content>
+<form [formGroup]="loginForm">
+
+  <!-- Used ID From Group -->
+  <div class="form-group">
+    <mat-form-field class="full-width">
+      <input matInput placeholder="User Id" placeholder="Enter your User Id" formControlName="userId" required>
+    </mat-form-field>
+  </div>
+
+   <!-- Password From Group -->
+  <div class="form-group">
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Password" type="password" placeholder="Enter your password" formControlName="password" required>
+       <!-- Password Validation  -->
+    <mat-error class="error" *ngIf="frm.password?.errors?.pattern" >Only small letters  and numbers allowed.</mat-error>
+    </mat-form-field>
+  </div>
+</form>
+</div>
+<!-- Login popup buttons -->
+<div mat-dialog-actions >
+  <button mat-button (click)="resetForm()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="loginClicked()" >Login</button>
+</div>

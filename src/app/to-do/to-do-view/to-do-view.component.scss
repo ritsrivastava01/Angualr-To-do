@@ -1,0 +1,41 @@
+:host {
+  display: block;
+
+  .container {
+    width: 70%;
+    margin: auto;
+
+    mat-hint {
+      color: #fff;
+      padding-left: 10px;
+    }
+  }
+
+  .no-todo {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    font-size: 3rem;
+    color: #FFF;
+    font-weight: bold;
+    text-align: center;
+    line-height: 2;
+  }
+
+  .add-todo {
+    width: 95%;
+    position: fixed;
+    float: left;
+    bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      font-size: 2rem;
+      right: 0px;
+    }
+  }
+
+}

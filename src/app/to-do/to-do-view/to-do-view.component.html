@@ -1,0 +1,25 @@
+<div *ngIf="showContent">
+
+  <div class="container">
+    
+    <!-- generate the TOdo List -->
+    <div *ngFor="let todo of todoList | async;">
+      <app-to-do-card [todo]=todo (deleteClicked)="deleteToDoClicked($event)" (todoUpdated)="updateTodo($event)" ></app-to-do-card>
+    </div>
+    
+    <!-- show the todo count -->
+    <mat-hint *ngIf="(todoList | async)?.length" align="end" class="mat-caption">{{(todoList | async)?.length }} item left.
+    </mat-hint>
+
+    <!-- SHow the message if no todo is added -->
+    <div *ngIf="!(todoList | async)?.length" class="mat-title no-todo">
+      No To DO Item. Please click on 'Add' button.
+    </div>
+
+  </div>
+
+  <!-- show the 'Add' button -->
+  <div class="add-todo">
+    <button mat-fab (click)="openToDoItemDialog()">+</button>
+  </div>
+</div>

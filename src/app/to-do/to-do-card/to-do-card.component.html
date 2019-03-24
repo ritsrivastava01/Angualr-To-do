@@ -1,0 +1,19 @@
+<mat-card>
+   <!-- Todo card view -->
+   <div class="to-do">
+      <mat-checkbox color="primary" [ngClass]="{'todo-done':todo.isCompleted}" [(ngModel)]="todo.isCompleted"
+         (change)=todoUpdate()>{{todo.title}}</mat-checkbox>
+   </div>
+   <div>
+      <!-- show the todo type -->
+      <span class="category " [ngClass]="{'public': todo.category=== ToDoEnum.PUBLIC,
+                                        'friend': todo.category=== ToDoEnum.FRIEND,
+                                        'personal': todo.category=== ToDoEnum.PERSONAL,
+                                        'family': todo.category=== ToDoEnum.FAMILY}">{{todo.category}}</span>
+
+      <!-- Delete icon -->
+      <button mat-button>
+         <mat-icon matTooltip="Delete" (click)="deleteTodo()">delete</mat-icon>
+      </button>
+   </div>
+</mat-card>

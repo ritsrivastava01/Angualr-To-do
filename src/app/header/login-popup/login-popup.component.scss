@@ -1,0 +1,17 @@
+:host {
+
+    mat-form-field {
+        width: 100%;
+    }
+
+    .mat-dialog-actions {
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    .error {
+        font-size: .7rem;
+        font-style: italic;
+    }
+}

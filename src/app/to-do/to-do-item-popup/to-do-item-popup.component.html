@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Add To-Do Item</h1>
+<div mat-dialog-content>
+
+  <!-- To-do popup field -->
+  <mat-form-field>
+    <input matInput [(ngModel)]="newTodo.title" placeholder="Title" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Select Todo type" [(ngModel)]="newTodo.category" required>
+      <mat-option *ngFor="let type of TodoCategories" [value]="type.value">{{type.key}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<!-- todo action bar -->
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-raised-button color="primary" [disabled]="!(newTodo.title && newTodo.category)" (click)="addTodo()">Add
+    TODO</button>
+</div>
