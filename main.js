@@ -6274,6 +6274,7 @@ module.exports = ":host app-to-do-view {\n  padding-top: 75px; }\n\n/*# sourceMa
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _to_do_manage_to_do_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./to-do/manage-to-do.service */ "./src/app/to-do/manage-to-do.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6284,14 +6285,22 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(manageTodoService) {
         var _this = this;
+        this.manageTodoService = manageTodoService;
         /**
          * used to save the login details
          * @param  {boolean} data
          */
-        this.handleLoginDone = function (data) { return _this.loginDone = data; };
+        this.handleLoginDone = function (data) {
+            _this.loginDone = data;
+            if (!_this.loginDone) {
+                // Need to clear the  to-do list
+                _this.manageTodoService.removeAllTodos();
+            }
+        };
     }
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -6300,7 +6309,7 @@ var AppComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")],
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_to_do_manage_to_do_service__WEBPACK_IMPORTED_MODULE_1__["ManageToDoService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -6428,8 +6437,6 @@ var HeaderComponent = /** @class */ (function () {
          */
         this.logoutClick = function () {
             localStorage.removeItem('login');
-            // remove all saved todos as well
-            localStorage.removeItem('todo');
             _this.loginStatus = !_this.loginStatus;
             _this.showSnackBar('You Logged out successfully');
             _this.notifyParent();
@@ -6764,6 +6771,14 @@ var ManageToDoService = /** @class */ (function () {
             }
         };
         /**
+         * Remove the all save tos- in local storage  and local list (todoList)
+         */
+        this.removeAllTodos = function () {
+            _this.todoList = [];
+            // remove all saved todos as well
+            localStorage.removeItem('todo');
+        };
+        /**
         * Check the list already saved in local storage OR not
         * @param  {string} key
         * @returns boolean
@@ -6992,7 +7007,7 @@ var ToDoItemPopupComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showContent\">\n\n  <div class=\"container\">\n    \n    <!-- generate the TOdo List -->\n    <div *ngFor=\"let todo of todoList | async;\">\n      <app-to-do-card [todo]=todo (deleteClicked)=\"deleteToDoClicked($event)\" (todoUpdated)=\"updateTodo($event)\" ></app-to-do-card>\n    </div>\n    \n    <!-- show the todo count -->\n    <mat-hint *ngIf=\"(todoList | async)?.length\" align=\"end\" class=\"mat-caption\">{{(todoList | async)?.length }} item left.\n    </mat-hint>\n\n    <!-- SHow the message if no todo is added -->\n    <div *ngIf=\"!(todoList | async)?.length\" class=\"mat-title no-todo\">\n      No To DO Item. Please click on 'Add' button.\n    </div>\n\n  </div>\n\n  <!-- show the 'Add' button -->\n  <div class=\"add-todo\">\n    <button mat-fab (click)=\"openToDoItemDialog()\">+</button>\n  </div>\n</div>"
+module.exports = "<div *ngIf=\"showContent\">\n\n  <div class=\"container\">\n    \n    <!-- generate the TOdo List -->\n    <div *ngFor=\"let todo of todoList | async;\">\n      <app-to-do-card [todo]=todo (deleteClicked)=\"deleteToDoClicked($event)\" (todoUpdated)=\"updateTodo($event)\" ></app-to-do-card>\n    </div>\n\n    <!-- show the todo count -->\n    <mat-hint *ngIf=\"(todoList | async)?.length\" align=\"end\" class=\"mat-caption\">{{(todoList | async)?.length }} item left.\n    </mat-hint>\n\n    <!-- SHow the message if no todo is added -->\n    <div *ngIf=\"!(todoList | async)?.length\" class=\"mat-title no-todo\">\n      No To-Do Item added. Please click on 'Add' button.\n    </div>\n  </div>\n\n  <!-- show the 'Add' button -->\n  <div class=\"add-todo\">\n    <button mat-fab (click)=\"openToDoItemDialog()\">+</button>\n  </div>\n</div>"
 
 /***/ }),
 
