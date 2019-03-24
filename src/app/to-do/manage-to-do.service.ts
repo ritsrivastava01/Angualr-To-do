@@ -77,6 +77,15 @@ export class ManageToDoService {
   }
 
   /**
+   * Remove the all save tos- in local storage  and local list (todoList)
+   */
+  removeAllTodos = (): void => {
+    this.todoList = [];
+    // remove all saved todos as well
+    localStorage.removeItem('todo');
+  }
+
+  /**
   * Check the list already saved in local storage OR not
   * @param  {string} key
   * @returns boolean

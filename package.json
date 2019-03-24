@@ -21,7 +21,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --base-href=https://ritsrivastava01.github.io/Angular-todo/ & angular-cli-ghpages",
+    "build": "ng build --prod --base-href=https://ritsrivastava01.github.io/Angular-To-do/ & angular-cli-ghpages",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

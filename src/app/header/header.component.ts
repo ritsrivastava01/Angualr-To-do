@@ -45,8 +45,6 @@ export class HeaderComponent implements OnInit {
    */
   logoutClick = (): void => {
     localStorage.removeItem('login');
-    // remove all saved todos as well
-    localStorage.removeItem('todo');
     this.loginStatus = !this.loginStatus;
     this.showSnackBar('You Logged out successfully');
     this.notifyParent();
