@@ -17,8 +17,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class LoginPopupComponent implements OnInit {
   loginForm: FormGroup;
   constructor(private fb: FormBuilder,
-              private dialogRef: MatDialogRef<LoginPopupComponent>,
-              @Inject(MAT_DIALOG_DATA) private loginResult: boolean) { }
+    private dialogRef: MatDialogRef<LoginPopupComponent>,
+    @Inject(MAT_DIALOG_DATA) private loginResult: boolean) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({

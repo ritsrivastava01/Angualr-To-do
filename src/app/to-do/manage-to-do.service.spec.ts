@@ -1,5 +1,6 @@
 import { ManageToDoService } from './manage-to-do.service';
 import { ToDo } from './to-do';
+import { fakeAsync, tick } from '@angular/core/testing';
 
 describe('ManageToDService', () => {
     let service: ManageToDoService;
@@ -8,7 +9,7 @@ describe('ManageToDService', () => {
         title: 'todo ' + x,
         isCompleted: false
     });
-    
+
     beforeEach(() => {
         spyOn(localStorage.__proto__, 'getItem').and.returnValue(JSON.stringify(fakeTodos));
         service = new ManageToDoService();
@@ -39,5 +40,24 @@ describe('ManageToDService', () => {
         });
     });
 
+    it('should toggle the to-do', fakeAsync(() => {
+        service.getSavedTodos();
+        let firstTodo: ToDo;
+        let todoStatus = false;
+        service.allToDos.subscribe((x: ToDo[]) => {
+            firstTodo = x[0];
+            expect(firstTodo.isCompleted).toBe(todoStatus);
+        });
+        tick();
+        firstTodo.isCompleted = true;
+        todoStatus = true;
+        service.toggleTodoComplete(firstTodo);
+    }));
 
-})
+    it('should remove all todos', () => {
+        spyOn(localStorage.__proto__, 'removeItem').and.returnValue(true);
+        service.removeAllTodos();
+        expect(localStorage.__proto__.removeItem).toHaveBeenCalled();
+    });
+});
+
