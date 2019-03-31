@@ -6,7 +6,6 @@
     <div *ngFor="let todo of todoList | async as list;">
       <app-to-do-card [todo]=todo (deleteClicked)="deleteToDoClicked($event)" (todoUpdated)="updateTodo($event)" ></app-to-do-card>
     </div>
-    
     <!-- show the todo count -->
     <mat-hint *ngIf="(todoList | async)?.length" align="end" class="mat-caption">{{inCompleteTodoCount}} item left.
     </mat-hint>
@@ -19,6 +18,6 @@
 
   <!-- show the 'Add' button -->
   <div class="add-todo">
-    <button mat-fab (click)="openToDoItemDialog()">+</button>
+    <button mat-fab (click)="openToDoItemDialog()" id="btn-addTodo">+</button>
   </div>
 </div>
