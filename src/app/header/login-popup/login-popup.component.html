@@ -6,14 +6,14 @@
   <!-- Used ID From Group -->
   <div class="form-group">
     <mat-form-field class="full-width">
-      <input matInput placeholder="User Id" placeholder="Enter your User Id" formControlName="userId" required>
+      <input matInput placeholder="User Id" placeholder="Enter your User Id" formControlName="userId" required id="user-id">
     </mat-form-field>
   </div>
 
    <!-- Password From Group -->
   <div class="form-group">
     <mat-form-field class="full-width">
-      <input matInput placeholder="Password" type="password" placeholder="Enter your password" formControlName="password" required>
+      <input matInput placeholder="Password" id="password" type="password" placeholder="Enter your password" formControlName="password" required>
        <!-- Password Validation  -->
     <mat-error class="error" *ngIf="frm.password?.errors?.pattern" >Only small letters  and numbers allowed.</mat-error>
     </mat-form-field>
@@ -23,5 +23,5 @@
 <!-- Login popup buttons -->
 <div mat-dialog-actions >
   <button mat-button (click)="resetForm()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="loginClicked()" >Login</button>
+  <button mat-raised-button color="primary" (click)="loginClicked()" id="btn-click">Login</button>
 </div>
